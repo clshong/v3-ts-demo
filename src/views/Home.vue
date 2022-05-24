@@ -18,6 +18,7 @@
           active-text-color="#ffd04b"
           background-color="#545c64"
           class="el-menu-vertical-demo"
+          :default-active="active"
           text-color="#fff"
         >
         <!-- :default-active="active" -->
@@ -40,15 +41,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter,useRoute } from "vue-router";
 export default defineComponent({
   name: "Home",
   setup() {
     const router = useRouter();
+    const rouer = useRoute()
     // 拿到所有路由实例
     const list = router.getRoutes().filter((v) => v.meta.isShow);
     return {
       list,
+      active:rouer.path
     };
   },
 });

@@ -8,6 +8,12 @@ export interface ListInt{
   userName:string,
   role:RoleInt[]
 }
+export interface activeInt{
+  id:number,
+  nikeName:string,
+  userName:string,
+  role:number[]
+}
 interface SelectDataInt {
   role:number,
   nikeName:string
@@ -26,10 +32,11 @@ export class InitData {
   list:[ListInt][] = []
   listData:[ListInt][] = []
   roleList:RoleListInt[] = []
-  active:ListInt ={
+  active:activeInt ={
     id: 0,
     nikeName: "",
     userName: "",
     role: []
   }
+  isShow = false
 }
