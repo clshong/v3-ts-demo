@@ -133,7 +133,7 @@ router.beforeEach(async (to)=>{
           text-color="#fff"
  >
 // 获取当前rouer实例对象
-*import* {useRoute } *from* "vue-router";
+*import* {useRoute,useRouter} *from* "vue-router";
 
 setup() {
     const router = useRouter();
