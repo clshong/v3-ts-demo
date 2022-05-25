@@ -2,7 +2,7 @@
 
 ## 一、项目介绍和核心
 
-本项目主要通过的是Vue3+Element+Axios+Typescript技术组成，项目核心主要是刚学习vue3和ts的伙伴来熟悉一下vue3的声明周期和ts的语法使用
+本项目主要通过的是Vue3+Element-Puls+Axios+Typescript技术组成，项目核心主要是刚接触Vue3和ts的伙伴来熟悉一下vue3的声明周期和Typescript的语法使用
 
 ## 二、项目架构
 
@@ -17,7 +17,7 @@
 
 `一、创建request.ts`
 
-```tsx
+```
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 
@@ -39,9 +39,12 @@ const $http = axios.create({
 }) 
 
 // 请求拦截
+?:代表数据中不一定存在
 $http.interceptors.request.use(config=>{
+  // 请求头
   config.headers = config?.headers || {}
   if(localStorage.getItem('token')){
+  // token生成
     config.headers.token = localStorage.getItem('token') || ''
   }
   return config
@@ -49,6 +52,7 @@ $http.interceptors.request.use(config=>{
 // 响应拦截
 $http.interceptors.response.use( res =>{
   const code:number = res.data.code
+  // 根据状态码进行提示错误
   if(code !== 200){
     MSG[code]
     ElMessage.error(MSG[code])
@@ -63,15 +67,14 @@ $http.interceptors.response.use( res =>{
 export default $http
 ```
 
-`二、创建api.ts`  实现对页面请求统一的管理
+二、创建api.ts实现对页面请求统一的管理
 
-```tsx
+```
 // 导入axios模块封装
 
 import $http from "./requset";
 
 // interface 接口的使用
-
 interface loginData{
   username:string,
   password:string
@@ -86,7 +89,7 @@ export const getRouter= () =>$http({url:'/getRouter',method:'GET'})
 
 ## 四、路由拦截-动态路由
 
-```tsx
+```
 // 路由拦截
 // 需要使用同步请求 async 和 await配合使用
 router.beforeEach(async (to)=>{
@@ -120,7 +123,7 @@ router.beforeEach(async (to)=>{
 
 ## 五、路由默认选中
 
-```vue
+```
 <el-menu
           router
           active-text-color="#ffd04b"
@@ -144,6 +147,7 @@ setup() {
   },
 ```
 #### 祝大家学有所用！
+
 ## Project setup
 ```
 npm install
